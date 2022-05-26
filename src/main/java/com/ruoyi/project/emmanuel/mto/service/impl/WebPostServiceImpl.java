@@ -106,6 +106,7 @@ public class WebPostServiceImpl extends ServiceImpl<WebPostMapper, WebMtoPost> i
     @Override
     public List<WebMtoPost> selectIndexNewPostList() {
         QueryWrapper<WebMtoPost> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(WebMtoPost::getStatus,0);
         queryWrapper.lambda().orderByDesc(WebMtoPost::getCreateTime).last("limit 10");
         List<WebMtoPost> webMtoPostList = postMapper.selectList(queryWrapper);
         return webMtoPostList;
@@ -446,6 +447,7 @@ public class WebPostServiceImpl extends ServiceImpl<WebPostMapper, WebMtoPost> i
      */
     private List<WebMtoPost> selectIndexHotPostList() {
         QueryWrapper<WebMtoPost> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(WebMtoPost::getStatus,0);
         queryWrapper.lambda().orderByDesc(WebMtoPost::getViews).last("limit 10");
         List<WebMtoPost> hotMtoPostList = postMapper.selectList(queryWrapper);
         return hotMtoPostList;

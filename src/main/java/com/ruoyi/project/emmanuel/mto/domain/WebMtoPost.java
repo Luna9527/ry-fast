@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.framework.aspectj.lang.annotation.Excel;
-import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -71,7 +70,7 @@ public class WebMtoPost implements Serializable {
     private Long featured;
 
     /**
-     * 文章状态
+     * 文章状态  0 发布
      */
     private Long status;
 

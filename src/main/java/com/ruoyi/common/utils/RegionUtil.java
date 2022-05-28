@@ -44,7 +44,7 @@ public class RegionUtil {
                 String tmpDir = System.getProperties().getProperty(JAVA_TEMP_DIR);
                 dbPath = tmpDir + "ip2region/ip2region.db";
                 file = new File(dbPath);
-                ClassPathResource cpr = new ClassPathResource("ip2region" + File.separator + "ip2region/ip2region.db");
+                ClassPathResource cpr = new ClassPathResource("ip2region/ip2region.db");
                 InputStream resourceAsStream = cpr.getInputStream();
                 if (resourceAsStream != null) {
                     FileUtils.copyInputStreamToFile(resourceAsStream, file);

@@ -152,4 +152,9 @@ public class Constants
      * 前台首页 友情链接
      */
     public static final String WEB_LINK = "web:link";
+
+    /**
+     * ip记录
+     */
+    public static final String WEB_STATISTICAL_IP = "web:statistical:Ip";
 }

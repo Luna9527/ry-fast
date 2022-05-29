@@ -31,7 +31,7 @@
 
         <div class="btn-group-sm" id="toolbar" role="group">
             <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()"
-               shiro:hasPermission="system:first:remove">
+               shiro:hasPermission="mto:blog:first:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
         </div>
@@ -42,7 +42,7 @@
 </div>
 <th:block th:include="include :: footer"/>
 <script th:inline="javascript">
-    var removeFlag = [[${@permission.hasPermi('system:first:remove')}]];
+    var removeFlag = [[${@permission.hasPermi('mto:blog:first:remove')}]];
     var prefix = ctx + "mto/post/first";
 
     $(function () {

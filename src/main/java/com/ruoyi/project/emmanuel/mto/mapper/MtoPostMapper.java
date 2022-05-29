@@ -1,10 +1,11 @@
 package com.ruoyi.project.emmanuel.mto.mapper;
 
-import java.util.List;
+import com.ruoyi.project.emmanuel.mto.domain.MtoLookIpFirst;
 import com.ruoyi.project.emmanuel.mto.domain.MtoPost;
 import com.ruoyi.project.emmanuel.mto.domain.MtoTag;
 import com.ruoyi.project.system.user.domain.User;
-import org.springframework.cache.annotation.Cacheable;
+
+import java.util.List;
 
 /**
  * 文章表题Mapper接口
@@ -79,4 +80,10 @@ public interface MtoPostMapper
      */
     Long isTitleExits(String markdownName);
 
+    /**
+     * 首次访问博客记录
+     * @param mtoLookIpFirst
+     * @return
+     */
+    List<MtoLookIpFirst> selectLookIpFirstList(MtoLookIpFirst mtoLookIpFirst);
 }

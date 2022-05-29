@@ -354,4 +354,15 @@
         SELECT id FROM mto_post where title = #{markdownName,jdbcType=VARCHAR} limit 1
     </select>
 
+    <select id="selectLookIpFirstList" resultType="com.ruoyi.project.emmanuel.mto.domain.MtoLookIpFirst">
+        select id, ip_addr, ip_location, first_visit_url, first_visit_date, remark from mto_look_ip_first
+        <where>
+            <if test="ipAddr != null  and ipAddr != ''"> and ip_addr = #{ipAddr}</if>
+            <if test="ipLocation != null  and ipLocation != ''"> and ip_location = #{ipLocation}</if>
+            <if test="firstVisitUrl != null  and firstVisitUrl != ''"> and first_visit_url = #{firstVisitUrl}</if>
+            <if test="firstVisitDate != null "> and date_format(first_visit_date,'%y-%m-%d') =date_format( #{firstVisitDate},'%y-%m-%d')</if>
+        </where>
+        order by first_visit_date desc
+    </select>
+
 </mapper>

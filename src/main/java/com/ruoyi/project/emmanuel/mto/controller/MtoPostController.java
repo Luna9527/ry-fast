@@ -1,24 +1,26 @@
 package com.ruoyi.project.emmanuel.mto.controller;
 
-import java.util.List;
+import com.ruoyi.framework.aspectj.lang.annotation.Log;
+import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
 import com.ruoyi.framework.interceptor.annotation.RepeatSubmit;
+import com.ruoyi.framework.web.controller.BaseController;
+import com.ruoyi.framework.web.domain.AjaxResult;
+import com.ruoyi.framework.web.page.TableDataInfo;
 import com.ruoyi.project.emmanuel.mto.domain.MtoChannel;
+import com.ruoyi.project.emmanuel.mto.domain.MtoLookIpFirst;
+import com.ruoyi.project.emmanuel.mto.domain.MtoPost;
 import com.ruoyi.project.emmanuel.mto.service.IMtoChannelService;
+import com.ruoyi.project.emmanuel.mto.service.IMtoPostService;
 import io.swagger.annotations.Api;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import com.ruoyi.framework.aspectj.lang.annotation.Log;
-import com.ruoyi.framework.aspectj.lang.enums.BusinessType;
-import com.ruoyi.project.emmanuel.mto.domain.MtoPost;
-import com.ruoyi.project.emmanuel.mto.service.IMtoPostService;
-import com.ruoyi.framework.web.controller.BaseController;
-import com.ruoyi.framework.web.domain.AjaxResult;
-import com.ruoyi.framework.web.page.TableDataInfo;
 import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 文章标题题Controller
@@ -146,6 +148,35 @@ public class MtoPostController extends BaseController {
     @ResponseBody
     public AjaxResult exportSelected(String postIds, HttpServletResponse response) {
         throw new RuntimeException("后期将会上线此功能");
+    }
+
+    /**
+     * 首次访问博客记录
+     */
+    @RequiresPermissions("mto:blog:first")
+    @GetMapping("/first")
+    public String first() {
+        return prefix + "/blogFirstLog";
+    }
+
+    /**
+     * 查询首次访问博客记录列表
+     */
+    @RequiresPermissions("mto:blog:first")
+    @PostMapping("/first/list")
+    @ResponseBody
+    public TableDataInfo list(MtoLookIpFirst mtoLookIpFirst) {
+        startPage();
+        List<MtoLookIpFirst> list = mtoPostService.selectLookIpFirstList(mtoLookIpFirst);
+        return getDataTable(list);
+    }
+
+    @RequiresPermissions("mto:blog:first:remove")
+    @ResponseBody
+    @Log(title = "首访博客记录", businessType = BusinessType.DELETE)
+    @PostMapping("/first/remove")
+    public AjaxResult firstRemove(String ids) {
+        return toAjax(mtoPostService.firstRemove(ids));
     }
 
 }

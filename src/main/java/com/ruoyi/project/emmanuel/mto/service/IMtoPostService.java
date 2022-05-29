@@ -1,13 +1,11 @@
 package com.ruoyi.project.emmanuel.mto.service;
 
-import com.ruoyi.project.emmanuel.mto.domain.MtoChannel;
+import com.ruoyi.project.emmanuel.mto.domain.MtoLookIpFirst;
 import com.ruoyi.project.emmanuel.mto.domain.MtoPost;
 import com.ruoyi.project.emmanuel.mto.domain.MtoTag;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.text.ParseException;
 import java.util.List;
 
 
@@ -73,18 +71,21 @@ public interface IMtoPostService {
 
     /**
      * 获取最新几条博客
+     *
      * @return
      */
     List<MtoPost> selectIndexNewPostList();
 
     /**
      * 获取新增需要的信息
+     *
      * @param modelMap
      */
     void getAddInfo(ModelMap modelMap);
 
     /**
      * 修改博客获取博客信息
+     *
      * @param id
      * @param modelMap
      */
@@ -92,9 +93,26 @@ public interface IMtoPostService {
 
     /**
      * 导入markdown
-     * @param markDownList   markdown文件
-     * @param updateSupport  是否更新  (true更新/false不更新)
+     *
+     * @param markDownList  markdown文件
+     * @param updateSupport 是否更新  (true更新/false不更新)
      * @return
      */
-    String importData(List<MultipartFile> markDownList,boolean updateSupport);
+    String importData(List<MultipartFile> markDownList, boolean updateSupport);
+
+    /**
+     * 首次访问博客记录
+     *
+     * @param mtoLookIpFirst
+     * @return
+     */
+    List<MtoLookIpFirst> selectLookIpFirstList(MtoLookIpFirst mtoLookIpFirst);
+
+    /**
+     * 删除首次访问博客记录
+     *
+     * @param ids
+     * @return
+     */
+    int firstRemove(String ids);
 }

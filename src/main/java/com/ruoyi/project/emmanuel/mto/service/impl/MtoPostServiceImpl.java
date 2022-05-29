@@ -7,14 +7,10 @@ import com.ruoyi.common.utils.security.ShiroUtils;
 import com.ruoyi.common.utils.text.Convert;
 import com.ruoyi.framework.config.RuoYiConfig;
 import com.ruoyi.project.emmanuel.mto.domain.*;
-import com.ruoyi.project.emmanuel.mto.mapper.MtoPostAttributeMapper;
-import com.ruoyi.project.emmanuel.mto.mapper.MtoPostMapper;
-import com.ruoyi.project.emmanuel.mto.mapper.MtoPostTagMapper;
-import com.ruoyi.project.emmanuel.mto.mapper.MtoTagMapper;
+import com.ruoyi.project.emmanuel.mto.mapper.*;
 import com.ruoyi.project.emmanuel.mto.service.IMtoCategoryService;
 import com.ruoyi.project.emmanuel.mto.service.IMtoChannelService;
 import com.ruoyi.project.emmanuel.mto.service.IMtoPostService;
-import com.ruoyi.project.emmanuel.mto.service.IWebPostService;
 import com.ruoyi.project.system.user.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,9 +40,6 @@ public class MtoPostServiceImpl implements IMtoPostService {
     private MtoPostMapper mtoPostMapper;
 
     @Autowired
-    private IWebPostService postService;
-
-    @Autowired
     private MtoPostAttributeMapper mtoPostAttributeMapper;
 
     @Autowired
@@ -59,6 +53,9 @@ public class MtoPostServiceImpl implements IMtoPostService {
 
     @Autowired
     private MtoTagMapper tagMapper;
+
+    @Autowired
+    private MtoLookIpFirstMapper lookIpFirstMapper;
 
 
     /**
@@ -373,5 +370,21 @@ public class MtoPostServiceImpl implements IMtoPostService {
         return i > 0 ? "导入成功" : "导入失败";
     }
 
+    /**
+     * 首次访问博客记录
+     *
+     * @param mtoLookIpFirst
+     * @return
+     */
+    @Override
+    public List<MtoLookIpFirst> selectLookIpFirstList(MtoLookIpFirst mtoLookIpFirst) {
+        return mtoPostMapper.selectLookIpFirstList(mtoLookIpFirst);
+    }
+
+    @Override
+    public int firstRemove(String ids) {
+        List<String> idList = new ArrayList<>(Arrays.asList(ids.split(",")));
+        return lookIpFirstMapper.deleteBatchIds(idList);
+    }
 
 }

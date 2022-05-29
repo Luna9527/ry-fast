@@ -5,6 +5,7 @@ import com.ruoyi.project.emmanuel.mto.domain.MtoPost;
 import com.ruoyi.project.emmanuel.mto.domain.MtoTag;
 import com.ruoyi.project.system.user.domain.User;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -86,4 +87,6 @@ public interface MtoPostMapper
      * @return
      */
     List<MtoLookIpFirst> selectLookIpFirstList(MtoLookIpFirst mtoLookIpFirst);
+
+    List<String> getStatisticalAccountIpByDay(Date nowDate);
 }

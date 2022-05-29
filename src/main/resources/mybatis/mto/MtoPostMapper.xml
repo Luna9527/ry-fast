@@ -365,4 +365,8 @@
         order by first_visit_date desc
     </select>
 
+    <select id="getStatisticalAccountIpByDay" resultType="string">
+        SELECT DISTINCT ip_addr from mto_look_ip_first where DATE_FORMAT(first_visit_date,'%Y-%m-%d') = DATE_FORMAT( #{nowDate},'%Y-%m-%d')
+    </select>
+
 </mapper>

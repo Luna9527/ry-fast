@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -385,6 +386,17 @@ public class MtoPostServiceImpl implements IMtoPostService {
     public int firstRemove(String ids) {
         List<String> idList = new ArrayList<>(Arrays.asList(ids.split(",")));
         return lookIpFirstMapper.deleteBatchIds(idList);
+    }
+
+    /**
+     * 在启动时将当日访问ip放到缓存中
+     */
+    @PostConstruct
+    private void getStatisticalAccountIpByDay() {
+        List<String> list = mtoPostMapper.getStatisticalAccountIpByDay(DateUtils.getNowDate());
+        if (ToolUtils.isNotEmpty(list)){
+            CacheUtils.put(Constants.WEB_STATISTICAL_IP, list);
+        }
     }
 
 }

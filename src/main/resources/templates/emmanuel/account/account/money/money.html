@@ -25,6 +25,17 @@
                             <input type="text" class="time-input" placeholder="请选择日期" name="moneyDate"  readonly="readonly"/>
                         </li>
                         <li>
+                            <label>分类：</label>
+                            <select  data-placeholder="请选择分类" id="classId" name="classId"
+                            >
+                                <option value="">请选择</option>
+                                <option th:each="accountClass:${classList}"
+                                        th:value="${accountClass.id}"
+                                        th:text="${accountClass.className}"
+                                ></option>
+                            </select>
+                        </li>
+                        <li>
                             <label>是否入账：</label>
                             <select name="isTotal" th:with="type=${@dict.getType('account_is_Total')}">
                                 <option value="">所有</option>

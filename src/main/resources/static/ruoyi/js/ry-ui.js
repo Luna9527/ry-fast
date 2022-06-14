@@ -934,6 +934,9 @@ var table = {
                     yes: callback,
                     cancel: function(index) {
                         return true;
+                    },
+                    success: function () {
+                        $(':focus').blur();
                     }
                 });
             },
@@ -980,6 +983,9 @@ var table = {
                     yes: options.yes,
                     cancel: function () {
                         return true;
+                    },
+                    success: function () {
+                        $(':focus').blur();
                     }
                 }, btnCallback));
                 if ($.common.isNotEmpty(options.full) && options.full === true) {
@@ -1023,6 +1029,9 @@ var table = {
                     },
                     cancel: function(index) {
                         return true;
+                    },
+                    success: function () {
+                        $(':focus').blur();
                     }
                 });
                 top.layer.full(index);

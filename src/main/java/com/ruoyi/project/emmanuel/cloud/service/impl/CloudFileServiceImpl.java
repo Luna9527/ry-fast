@@ -174,7 +174,7 @@ public class CloudFileServiceImpl extends ServiceImpl<CloudFileMapper, CloudFile
         try {
             //获取文件信息
             CloudFile cloudFile = cloudFileMapper.selectById(fileId);
-            this.downloadFile(cloudFile.getUrlPath(), response);
+            this.downloadFile(cloudFile.getUrlPath(), response,cloudFile.getOldfilename());
             //修改文件的下载次数
             cloudFile.setDowncounts(cloudFile.getDowncounts() + 1);
             cloudFileMapper.updateById(cloudFile);
@@ -233,10 +233,11 @@ public class CloudFileServiceImpl extends ServiceImpl<CloudFileMapper, CloudFile
 
     /**
      * @param resource 数据库文件地址
+     * @param downloadName 下载名称
      * @param response
      * @throws Exception
      */
-    private void downloadFile(String resource, HttpServletResponse response) throws Exception {
+    private void downloadFile(String resource, HttpServletResponse response,String downloadName) throws Exception {
         if (StringUtils.isEmpty(resource)) {
             throw new RuntimeException("路径不能为空");
         }
@@ -245,7 +246,6 @@ public class CloudFileServiceImpl extends ServiceImpl<CloudFileMapper, CloudFile
         // 数据库资源地址
         String downloadPath = localPath + StringUtils.substringAfter(resource, Constants.RESOURCE_PREFIX);
         // 下载名称
-        String downloadName = StringUtils.substringAfterLast(downloadPath, "/");
         response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
         FileUtils.setAttachmentResponseHeader(response, downloadName);
         FileUtils.writeBytes(downloadPath, response.getOutputStream());

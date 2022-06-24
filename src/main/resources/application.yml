@@ -54,7 +54,7 @@ user:
 spring:
   # 模板引擎
   thymeleaf:
-#    mode: HTML
+    #    mode: HTML
     mode: LEGACYHTML5
     prefix: classpath:/templates/  #prefix：指定模板所在的目录
     check-template-location: true  #check-tempate-location: 检查模板路径是否存在
@@ -73,11 +73,11 @@ spring:
     active: druid
   # 文件上传
   servlet:
-     multipart:
-       # 单个文件大小
-       max-file-size:  10MB
-       # 设置总上传的文件大小
-       max-request-size:  20MB
+    multipart:
+      # 单个文件大小
+      max-file-size:  10MB
+      # 设置总上传的文件大小
+      max-request-size:  20MB
   # 服务模块
   devtools:
     restart:
@@ -85,13 +85,13 @@ spring:
       enabled: true
   # 邮箱配置 https://blog.csdn.net/weixin_38575051/article/details/93591123
   mail:
-#    true 开启邮件发送，为空或者false禁用发送邮件
-    enabled: false
+    #    true 开启邮件发送，为空或者false禁用发送邮件
+    enabled: true
     host: smtp.163.com
-#    port: 25
+    #    port: 25
     # mail邮箱只需要修改这两处地址即可
-    username: xxx你的邮箱地址（修改）
-    password: xxx你的mail秘钥（修改）
+    username: jingyun0328.@163.com
+    password: BJRPDDJGKBLFLDSD
     properties:
       mail:
         smtp:
@@ -183,9 +183,9 @@ xss:
 # 第三方登录
 auth:
   gitee:
-    clientId: 你的码云clientId
-    clientSecret: 你的码云clientSecret
-    callbackUrl: 你的码云回调地址
+    clientId: b471d8d3f65d68df7cf57b14bc8cd9ee05086bdc72ad8b7a39ce2713119c006f
+    clientSecret: 4df2505ded93d9fc64cb149dc6cc7c73463351e83f9e8c078d6301a5e3d5024c
+    callbackUrl: http://127.0.0.1:8080/callback
 
 # Swagger配置
 swagger:
@@ -195,7 +195,7 @@ swagger:
 # 代码生成
 gen:
   # 作者
-  author: 一粒麦子
+  author: Aeluna
   # 默认生成包路径 system 需改成自己的模块名称 如 system monitor tool
   packageName: com.ruoyi.project.system
   # 自动去除表前缀，默认是true
